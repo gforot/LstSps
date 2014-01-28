@@ -17,13 +17,13 @@
     shell:SystemTray.IsVisible="True">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
-    <Grid x:Name="LayoutRoot" Background="Transparent">
+    <Grid x:Name="LayoutRoot" Background="{StaticResource background}">
         <Grid.Resources>
             <Converters:VisibleToVisibilityConverter x:Key="visibleToVisibilityConverter" />
             <Converters:CheckedToColorConverter x:Key="checkedToColorConverter" />
             <Converters:SummaryToColorConverter x:Key="summaryToColorConverter" />
             <DataTemplate x:Key="listItemTemplate">
-                
+
                 <Border HorizontalAlignment="Stretch" Margin="2" BorderBrush="{Binding IsChecked, Converter={StaticResource checkedToColorConverter}}" BorderThickness="2" CornerRadius="5" >
 
                     <Controls:ContextMenuService.ContextMenu>
@@ -39,7 +39,8 @@
                 </Border>
             </DataTemplate>
         </Grid.Resources>
-        
+
+
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -78,7 +79,7 @@
                               ApplicationName="Lista Spesa"
                               CompanyName="gforot"/>
     </Grid>
- 
+
 
 
 </phone:PhoneApplicationPage>

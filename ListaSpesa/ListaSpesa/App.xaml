@@ -8,6 +8,10 @@
     <!--Application Resources-->
     <Application.Resources>
         <local:LocalizedStrings xmlns:local="clr-namespace:ListaSpesa"  x:Key="LocalizedStrings"/>
+        <LinearGradientBrush x:Key="background" EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="#FF7A7979" Offset="0"/>
+            <GradientStop Color="#FFE89E9E" Offset="0.999"/>
+        </LinearGradientBrush>
     </Application.Resources>
 
     <Application.ApplicationLifetimeObjects>
