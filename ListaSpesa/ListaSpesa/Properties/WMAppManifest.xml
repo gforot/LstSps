@@ -4,7 +4,7 @@
     <Extra Name="Tiles" />
   </AppExtra>
   <App xmlns="" ProductID="{077527f7-6e29-47fe-8144-8ea8332aaf8a}" Title="Lista Spesa" RuntimeType="Silverlight" Version="1.0.1" Genre="apps.normal" Author="Andrea Rota" Description="Applicazione per gestire una lista della spesa" Publisher="Andrea Rota" BitsPerPixel="16">
-    <IconPath IsRelative="true" IsResource="false">Icons\99x99.png</IconPath>
+    <IconPath IsRelative="true" IsResource="false">99x99.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_GAMERSERVICES" />
       <Capability Name="ID_CAP_IDENTITY_DEVICE" />
@@ -27,7 +27,7 @@
     <Tokens>
       <PrimaryToken TokenID="ListaSpesaToken" TaskName="_default">
         <TemplateType5>
-          <BackgroundImageURI IsRelative="true" IsResource="false">Icons\173x173.png</BackgroundImageURI>
+          <BackgroundImageURI IsRelative="true" IsResource="false">100x100.png</BackgroundImageURI>
           <Count>0</Count>
           <Title>Lista Spesa</Title>
         </TemplateType5>

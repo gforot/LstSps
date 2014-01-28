@@ -115,6 +115,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="99x99.png" />
     <Content Include="Icons\173x173.png" />
     <Content Include="Icons\346x173.png" />
     <Content Include="Icons\99x99.png" />
