@@ -22,9 +22,9 @@ namespace ListaSpesa.Datalayer
 
         }
 
-        public MainPageViewModel Load()
+        public ObservableCollection<ListItem> LoadSpesa()
         {
-            MainPageViewModel viewModel = new MainPageViewModel();
+            ObservableCollection<ListItem> items = new ObservableCollection<ListItem>();
             using (IsolatedStorageFile isf = IsolatedStorageFile.GetUserStoreForApplication())
             {
                 if (isf.FileExists(Constants.StorageFileName))
@@ -36,15 +36,15 @@ namespace ListaSpesa.Datalayer
 
                         if ((obj != null) && (obj is ObservableCollection<ListItem>))
                         {
-                            viewModel.SetItems(obj as ObservableCollection<ListItem>);
+                           items = obj as ObservableCollection<ListItem>;
                         }
                     }
                 }
             }
-            return viewModel;
+            return items;
         }
 
-        internal void Save(MainPageViewModel vm)
+        public void SaveSpesa(ObservableCollection<ListItem> items)
         {
             using (var store = IsolatedStorageFile.GetUserStoreForApplication())
             {
@@ -54,7 +54,44 @@ namespace ListaSpesa.Datalayer
                                                                   store))
                 {
                     XmlSerializer serializer = new XmlSerializer(typeof(ObservableCollection<ListItem>));
-                    serializer.Serialize(stream, vm.ListOfItems);
+                    serializer.Serialize(stream, items);
+                }
+            }
+        }
+
+        public ObservableCollection<ListItem> LoadFavourites()
+        {
+            ObservableCollection<ListItem> rval = new ObservableCollection<ListItem>();
+            using (IsolatedStorageFile isf = IsolatedStorageFile.GetUserStoreForApplication())
+            {
+                if (isf.FileExists(Constants.FavouritesFileName))
+                {
+                    using (IsolatedStorageFileStream isfs = isf.OpenFile(Constants.FavouritesFileName, FileMode.Open))
+                    {
+                        XmlSerializer ser = new XmlSerializer(typeof(ObservableCollection<ListItem>));
+                        object obj = ser.Deserialize(isfs);
+
+                        if ((obj != null) && (obj is ObservableCollection<ListItem>))
+                        {
+                            rval = obj as ObservableCollection<ListItem>;
+                        }
+                    }
+                }
+            }
+            return rval;
+        }
+
+        public void SaveFavourites(ObservableCollection<ListItem> items)
+        {
+            using (var store = IsolatedStorageFile.GetUserStoreForApplication())
+            {
+                using (var stream = new IsolatedStorageFileStream(Constants.FavouritesFileName,
+                                                                  FileMode.Create,
+                                                                  FileAccess.Write,
+                                                                  store))
+                {
+                    XmlSerializer serializer = new XmlSerializer(typeof(ObservableCollection<ListItem>));
+                    serializer.Serialize(stream, items);
                 }
             }
         }

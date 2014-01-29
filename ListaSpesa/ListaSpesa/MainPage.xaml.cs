@@ -129,7 +129,7 @@ namespace ListaSpesa
 
         void appBarButtonFavs_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            this.NavigationService.Navigate(new Uri("/src/views/FavouritesPage.xaml", UriKind.Relative));
         }
 
         void appBarButtonInfo_Click(object sender, EventArgs e)

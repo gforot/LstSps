@@ -34,6 +34,8 @@ namespace ListaSpesa
         /// </summary>
         public MainPageViewModel ViewModel { get; private set; }
 
+        public FavouritesPageViewModel FavouritesViewModel { get; private set; }
+
         /// <summary>
         /// Gets the application.
         /// </summary>
@@ -87,7 +89,13 @@ namespace ListaSpesa
             //caricare qui il ViewModel?
             if (ViewModel == null)
             {
-                ViewModel = Datalayer.DataLayer.GetInstance().Load();
+                ViewModel = new MainPageViewModel();
+                ViewModel.SetItems(Datalayer.DataLayer.GetInstance().LoadSpesa());
+            }
+            if (FavouritesViewModel == null)
+            {
+                FavouritesViewModel = new FavouritesPageViewModel();
+                FavouritesViewModel.SetItems(Datalayer.DataLayer.GetInstance().LoadFavourites());
             }
         }
 
@@ -108,7 +116,8 @@ namespace ListaSpesa
         private void Application_Closing(object sender, ClosingEventArgs e)
         {
             //Inserire qui il salvataggio?
-            Datalayer.DataLayer.GetInstance().Save(ViewModel);
+            Datalayer.DataLayer.GetInstance().SaveSpesa(ViewModel.ListOfItems);
+            Datalayer.DataLayer.GetInstance().SaveFavourites(FavouritesViewModel.ListOfItems);
         }
 
         // Code to execute if a navigation fails
