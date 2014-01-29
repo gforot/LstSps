@@ -1,6 +1,6 @@
 ﻿using ListaSpesa.Resources;
 
-namespace ListaSpesa
+namespace ListaSpesa.Utils
 {
     public class LocalizedStrings
     {

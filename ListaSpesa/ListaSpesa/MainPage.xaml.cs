@@ -8,7 +8,7 @@ using System.Windows.Data;
 using System.Linq;
 using System.Xml.Serialization;
 using ListaSpesa.Model;
-using ListaSpesa.Viewmodel;
+using ListaSpesa.Viewmodels;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using ListaSpesa.Resources;
@@ -97,7 +97,7 @@ namespace ListaSpesa
         private void Info_Click(object sender, EventArgs e)
         {
             //Click
-            this.NavigationService.Navigate(new Uri("/InfoPage.xaml", UriKind.Relative));
+            this.NavigationService.Navigate(new Uri("/src/views/InfoPage.xaml", UriKind.Relative));
         }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)

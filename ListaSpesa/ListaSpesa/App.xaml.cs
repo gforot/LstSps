@@ -14,7 +14,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Xml.Serialization;
-using ListaSpesa.Viewmodel;
+using ListaSpesa.Viewmodels;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using ListaSpesa.Model;

@@ -1,14 +1,12 @@
-﻿
-using System.ComponentModel;
-using System.Runtime.Serialization;
+﻿using System.Runtime.Serialization;
+using GalaSoft.MvvmLight;
 
 namespace ListaSpesa.Model
 {
     [DataContract]
-    public class ListItem : INotifyPropertyChanged
+    public class ListItem : ViewModelBase
     {
-        private static int _index = 1;
-
+        #region Constructors
         public ListItem()
             :this(string.Empty)
         {
@@ -24,17 +22,31 @@ namespace ListaSpesa.Model
         {
             Text = text;
             _isChecked = isChecked;
-            _id = _index++;
         }
+        #endregion
 
+        #region Properties
+
+        #region IsChecked
+        
+        private const string _isCheckedPrpName = "IsChecked";
         private bool _isChecked;
-        private string _text;
 
-        private int _id;
-        public int Id
+        [DataMember]
+        public bool IsChecked
         {
-            get { return _id; }
+            get { return _isChecked; }
+            set
+            {
+                _isChecked = value;
+                RaisePropertyChanged(_isCheckedPrpName);
+            }
         }
+        #endregion
+
+        #region Text
+        private const string _textPrpName = "Text";
+        private string _text;
 
         [DataMember]
         public string Text
@@ -43,29 +55,11 @@ namespace ListaSpesa.Model
             set
             {
                 _text = value;
-                RaisePropertyChanged("Text");
+                RaisePropertyChanged(_textPrpName);
             }
         }
-        
-        [DataMember]
-        public bool IsChecked
-        {
-            get { return _isChecked; }
-            set
-            {
-                _isChecked = value;
-                RaisePropertyChanged("IsChecked");
-            }
-        }
+        #endregion
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void RaisePropertyChanged(string prpName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(prpName));
-            }
-        }
+        #endregion
     }
 }

@@ -4,7 +4,7 @@ using System.IO.IsolatedStorage;
 using System.Xml.Serialization;
 using ListaSpesa.Model;
 using ListaSpesa.Utils;
-using ListaSpesa.Viewmodel;
+using ListaSpesa.Viewmodels;
 
 namespace ListaSpesa.Datalayer
 {
@@ -54,7 +54,7 @@ namespace ListaSpesa.Datalayer
                                                                   store))
                 {
                     XmlSerializer serializer = new XmlSerializer(typeof(ObservableCollection<ListItem>));
-                    serializer.Serialize(stream, vm.Items);
+                    serializer.Serialize(stream, vm.ListOfItems);
                 }
             }
         }

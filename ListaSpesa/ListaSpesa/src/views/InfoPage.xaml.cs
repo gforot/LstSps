@@ -9,20 +9,16 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
+using ListaSpesa.Viewmodels;
 using Microsoft.Phone.Controls;
 
-namespace ListaSpesa
+namespace ListaSpesa.Views
 {
     public partial class InfoPage : PhoneApplicationPage
     {
         public InfoPage()
         {
             InitializeComponent();
-        }
-
-        private void ApplicationBarIconButton_Click(object sender, EventArgs e)
-        {
-            this.NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
         }
     }
 }

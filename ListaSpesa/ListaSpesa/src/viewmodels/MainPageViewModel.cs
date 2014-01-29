@@ -6,55 +6,10 @@ using ListaSpesa.Commands;
 using ListaSpesa.Model;
 using ListaSpesa.Utils;
 
-
-namespace ListaSpesa.Viewmodel
+namespace ListaSpesa.Viewmodels
 {
     public class MainPageViewModel : ViewModelBase
     {
-        //Membri privati
-        private ObservableCollection<ListItem> _listOfItems;
-        private string _newItemText;
-        private bool _showInput;
-
-        public ObservableCollection<ListItem> Items
-        {
-            get { return _listOfItems; }
-        }
-        public string Summary
-        {
-            get { return GetSummary(); }
-        }
-        public string NewItemText
-        {
-            get { return _newItemText; }
-            set
-            {
-                _newItemText = value;
-                RaisePropertyChanged("NewItemText");
-                //Notifico che deve essere rivalutata la abilitazione del comando
-                AddItemCommand.RaiseCanExecuteChanged();
-            }
-        }
-        public bool ShowInput
-        {
-            get { return _showInput; }
-            set
-            {
-                _showInput = value;
-                RaisePropertyChanged("ShowInput");
-            }
-        }
-        public bool IsSpesaFinished
-        {
-            get
-            {
-                return (!IsSpesaEmpty) && (GetNumberOfMissingItems()==0);
-            }
-        }
-
-        //Commands
-        public DelegateCommand AddItemCommand { get; private set; }
-
         #region Costruttore
         /// <summary>
         /// Costruttore
@@ -62,11 +17,116 @@ namespace ListaSpesa.Viewmodel
         public MainPageViewModel()
         {
             _listOfItems = new ObservableCollection<ListItem>();
-
             _listOfItems.CollectionChanged += _listOfItems_CollectionChanged;
+
             AddItemCommand = new DelegateCommand((o) => AddItem(), (o) => CanAddItem);
             NewItemText = string.Empty;
             ShowInput = true;
+        }
+        #endregion
+
+        #region Properties
+
+        #region ListOfItems
+        private const string _listOfItemsPrpName = "ListOfItems";
+        private readonly ObservableCollection<ListItem> _listOfItems;
+
+        public ObservableCollection<ListItem> ListOfItems
+        {
+            get { return _listOfItems; }
+        }
+        #endregion
+
+        #region IsSpesaFinished
+
+        private const string _isSpesaFinishedPrpName = "IsSpesaFinished";
+        public bool IsSpesaFinished
+        {
+            get
+            {
+                return (!IsSpesaEmpty) && (GetNumberOfMissingItems() == 0);
+            }
+        }
+
+        private void RaiseIsSpesaFinished()
+        {
+            RaisePropertyChanged(_isSpesaFinishedPrpName);
+        }
+        #endregion
+
+        #region Summary
+        private const string _summaryPrpName = "Summary";
+        public string Summary
+        {
+            get { return GetSummary(); }
+        }
+
+        private void RaiseSummaryChanged()
+        {
+            RaisePropertyChanged(_summaryPrpName);
+        }
+        #endregion
+
+        #region NewItemText
+        private const string _newItemTextPrpName = "NewItemText";
+        private string _newItemText;
+
+        public string NewItemText
+        {
+            get { return _newItemText; }
+            set
+            {
+                _newItemText = value;
+                RaisePropertyChanged(_newItemTextPrpName);
+                //Notifico che deve essere rivalutata la abilitazione del comando
+                AddItemCommand.RaiseCanExecuteChanged();
+            }
+        }
+        #endregion
+
+        #region ShowInput
+        private const string _showInputPrpName = "ShowInput";
+        private bool _showInput;
+        public bool ShowInput
+        {
+            get { return _showInput; }
+            set
+            {
+                _showInput = value;
+                RaisePropertyChanged(_showInputPrpName);
+            }
+        }
+        #endregion
+
+        #region IsSpesaEmpty
+
+        private bool IsSpesaEmpty
+        {
+            get { return _listOfItems.Count == 0; }
+        }
+
+        #endregion
+
+        #endregion
+
+        #region Commands
+        public DelegateCommand AddItemCommand { get; private set; }
+
+        /// <summary>
+        /// Dice se è abilitato il button di aggiunta elemento alla spesa
+        /// </summary>
+        private bool CanAddItem
+        {
+            get { return !string.IsNullOrEmpty(_newItemText); }
+        }
+
+        /// <summary>
+        /// Aggiunge un elemento alla spesa
+        /// </summary>
+        private void AddItem()
+        {
+            AddItemToList(new ListItem(NewItemText));
+            ResetTextbox();
         }
         #endregion
 
@@ -85,14 +145,7 @@ namespace ListaSpesa.Viewmodel
         /// </summary>
         public void ClearList()
         {
-            if (_listOfItems == null)
-            {
-                _listOfItems = new ObservableCollection<ListItem>();
-            }
-            else
-            {
-                _listOfItems.Clear();
-            }
+            _listOfItems.Clear();
         }
 
         public void RemoveItem(ListItem li)
@@ -101,42 +154,7 @@ namespace ListaSpesa.Viewmodel
         }
         #endregion
 
-        #region Commands
-        /// <summary>
-        /// Dice se è abilitato il button di aggiunta elemento alla spesa
-        /// </summary>
-        private bool CanAddItem
-        {
-            //get { return true; }
-            get { return !string.IsNullOrEmpty(_newItemText); }
-        }
-
-        /// <summary>
-        /// Aggiunge un elemento alla spesa
-        /// </summary>
-        private void AddItem()
-        {
-            ////get the text
-            //if (string.IsNullOrEmpty(NewItemText))
-            //{
-            //    MessageBox.Show(Messages.MsgValidItem);
-            //    return;
-            //}
-            AddItemToList(new ListItem(NewItemText));
-            ResetTextbox();
-        }
-        #endregion
-
         #region Metodi privati
-        private void RaiseSummaryChanged()
-        {
-            RaisePropertyChanged("Summary");
-        }
-
-        private void RaiseIsSpesaFinished()
-        {
-            RaisePropertyChanged("IsSpesaFinished");
-        }
 
         private void ResetTextbox()
         {
@@ -145,20 +163,8 @@ namespace ListaSpesa.Viewmodel
 
         private void AddItemToList(ListItem item)
         {
-            if (_listOfItems == null)
-            {
-                ClearList();
-            }
-            if (_listOfItems != null)
-            {
-                item.PropertyChanged += item_PropertyChanged;
-                _listOfItems.Add(item);
-            }
-        }
-
-        private bool IsSpesaEmpty
-        {
-            get { return ((_listOfItems == null) || (_listOfItems.Count == 0)); }
+            item.PropertyChanged += item_PropertyChanged;
+            _listOfItems.Add(item);
         }
 
         private string GetSummary()
@@ -189,13 +195,11 @@ namespace ListaSpesa.Viewmodel
             RaiseIsSpesaFinished();
         }
 
-
         private void item_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             RaiseSummaryChanged();
             RaiseIsSpesaFinished();
         }
         #endregion
-
     }
 }
