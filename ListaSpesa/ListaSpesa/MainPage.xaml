@@ -28,7 +28,7 @@
 
                     <Controls:ContextMenuService.ContextMenu>
                         <Controls:ContextMenu IsEnabled="True" >
-                            <Controls:MenuItem Header="Elimina" Click="MenuItem_Click"/>
+                            <Controls:MenuItem Header="Elimina" Click="RemoveItem_Click"/>
                         </Controls:ContextMenu>
                     </Controls:ContextMenuService.ContextMenu>
                     <StackPanel Orientation="Horizontal" Width="600">

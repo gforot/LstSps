@@ -141,6 +141,7 @@
     <Content Include="Icons\173x173.png" />
     <Content Include="Icons\346x173.png" />
     <Content Include="Icons\99x99.png" />
+    <Content Include="Images\appbar.favs.rest.png" />
     <Content Include="README_FIRST.txt" />
     <Content Include="todo.txt" />
     <Content Include="Toolkit.Content\ApplicationBar.Add.png" />

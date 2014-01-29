@@ -28,7 +28,7 @@ namespace ListaSpesa
 
             CreateTiles();
 
-            this.DataContext = App.Current.ViewModel ;
+            this.DataContext = App.Current.ViewModel;
 
             FeedbackOverlay.VisibilityChanged += FeedbackOverlay_VisibilityChanged;
         }
@@ -54,15 +54,9 @@ namespace ListaSpesa
             }
         }
 
-        void FeedbackOverlay_VisibilityChanged(object sender, EventArgs e)
+        private void FeedbackOverlay_VisibilityChanged(object sender, EventArgs e)
         {
             ApplicationBar.IsVisible = (FeedbackOverlay.Visibility != Visibility.Visible);
-        }
-
-
-        private void ApplicationBarIconButton_Click(object sender, EventArgs e)
-        {
-            App.Current.ViewModel.ClearList();
         }
 
         private void TextBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
@@ -79,28 +73,9 @@ namespace ListaSpesa
             }
         }
 
-        //private void ShowTxtBox_Click(object sender, EventArgs e)
-        //{
-        //    _vm.ShowInput = true;
-        //}
+        #region Context Menu
 
-        //private void HideTxtBox_Click(object sender, EventArgs e)
-        //{
-        //    _vm.ShowInput = false;
-        //}
-
-        protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
-        {
-            base.OnNavigatedTo(e);
-        }
-
-        private void Info_Click(object sender, EventArgs e)
-        {
-            //Click
-            this.NavigationService.Navigate(new Uri("/src/views/InfoPage.xaml", UriKind.Relative));
-        }
-
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        private void RemoveItem_Click(object sender, RoutedEventArgs e)
         {
             ListBoxItem selectedListBoxItem = this.listBox1.ItemContainerGenerator.ContainerFromItem(
                 (sender as MenuItem).DataContext) as ListBoxItem;
@@ -115,29 +90,58 @@ namespace ListaSpesa
             }
         }
 
-        // Build a localized ApplicationBar
+        #endregion
+
+        #region ApplicationBar
+
         private void BuildLocalizedApplicationBar()
         {
             // Set the page's ApplicationBar to a new instance of ApplicationBar.
             ApplicationBar = new ApplicationBar();
 
+            #region Empty
             // Create a new button and set the text value to the localized string from AppResources.
-            ApplicationBarIconButton appBarButtonSvuota =
+            ApplicationBarIconButton appBarButtonEmpty =
                 new ApplicationBarIconButton(new
                 Uri("/Images/appbar.cancel.rest.png", UriKind.Relative));
-            appBarButtonSvuota.Click += ApplicationBarIconButton_Click;
-            appBarButtonSvuota.Text = AppResources.Svuota;
+            appBarButtonEmpty.Click += appBarButtonEmpty_Click;
+            appBarButtonEmpty.Text = AppResources.Svuota;
+            #endregion
 
+            #region Favourites
+            ApplicationBarIconButton appBarButtonFavs =
+                 new ApplicationBarIconButton(new Uri("/Images/appbar.favs.rest.png", UriKind.Relative));
+            appBarButtonFavs.Click += appBarButtonFavs_Click;
+            appBarButtonFavs.Text = AppResources.Favourites;
+            #endregion
+
+            #region Info
             ApplicationBarIconButton appBarButtonInfo =
-new ApplicationBarIconButton(new
-Uri("/Images/appbar.questionmark.rest.png", UriKind.Relative));
-            appBarButtonInfo.Click += Info_Click;
+                new ApplicationBarIconButton(new Uri("/Images/appbar.questionmark.rest.png", UriKind.Relative));
+            appBarButtonInfo.Click += appBarButtonInfo_Click;
             appBarButtonInfo.Text = AppResources.Info;
+            #endregion
 
-            ApplicationBar.Buttons.Add(appBarButtonSvuota);
+            ApplicationBar.Buttons.Add(appBarButtonEmpty);
+            ApplicationBar.Buttons.Add(appBarButtonFavs);
             ApplicationBar.Buttons.Add(appBarButtonInfo);
         }
 
+        void appBarButtonFavs_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        void appBarButtonInfo_Click(object sender, EventArgs e)
+        {
+            this.NavigationService.Navigate(new Uri("/src/views/InfoPage.xaml", UriKind.Relative));
+        }
+
+        void appBarButtonEmpty_Click(object sender, EventArgs e)
+        {
+            App.Current.ViewModel.ClearList();
+        }
+        #endregion
 
     }
 }

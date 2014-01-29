@@ -123,6 +123,9 @@
   <data name="DevelopedBy" xml:space="preserve">
     <value>Developed by Andrea Rota</value>
   </data>
+  <data name="Favourites" xml:space="preserve">
+    <value>Favourites</value>
+  </data>
   <data name="FreeVersion" xml:space="preserve">
     <value>Free Version</value>
   </data>
