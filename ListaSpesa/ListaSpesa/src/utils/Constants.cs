@@ -1,5 +1,5 @@
 ﻿
-namespace ListaSpesa
+namespace ListaSpesa.Utils
 {
     public class Constants
     {

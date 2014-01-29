@@ -1,6 +1,6 @@
-﻿
-using ListaSpesa.Resources;
-namespace ListaSpesa
+﻿using ListaSpesa.Resources;
+
+namespace ListaSpesa.Utils
 {
     public class Messages
     {
