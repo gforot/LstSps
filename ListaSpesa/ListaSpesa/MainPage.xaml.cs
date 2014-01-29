@@ -14,6 +14,7 @@ using Microsoft.Phone.Shell;
 using ListaSpesa.Resources;
 using Mangopollo.Tiles;
 using System.Diagnostics;
+using ListaSpesa.Utils;
 
 namespace ListaSpesa
 {

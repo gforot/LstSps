@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows;
 using ListaSpesa.Commands;
 using ListaSpesa.Model;
+using ListaSpesa.Utils;
 
 namespace ListaSpesa.Viewmodel
 {
