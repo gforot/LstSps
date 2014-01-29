@@ -20,8 +20,6 @@ namespace ListaSpesa
 {
     public partial class MainPage : PhoneApplicationPage
     {
-        private static MainPageViewModel _vm;
-
         // Constructor
         public MainPage()
         {
@@ -30,11 +28,7 @@ namespace ListaSpesa
 
             CreateTiles();
 
-            if (_vm == null)
-            {
-                _vm = Load();
-            }
-            this.DataContext = _vm;
+            this.DataContext = App.Current.ViewModel ;
 
             FeedbackOverlay.VisibilityChanged += FeedbackOverlay_VisibilityChanged;
         }
@@ -68,49 +62,7 @@ namespace ListaSpesa
 
         private void ApplicationBarIconButton_Click(object sender, EventArgs e)
         {
-            _vm.ClearList();
-        }
-
-        private void Save_Click(object sender, EventArgs e)
-        {
-            Save(_vm);
-        }
-
-        private static void Save(MainPageViewModel viewModel)
-        {
-            using (var store = IsolatedStorageFile.GetUserStoreForApplication())
-            {
-                using (var stream = new IsolatedStorageFileStream(Constants.StorageFileName,
-                                                                  FileMode.Create,
-                                                                  FileAccess.Write,
-                                                                  store))
-                {
-                    XmlSerializer serializer = new XmlSerializer(typeof(ObservableCollection<ListItem>));
-                    serializer.Serialize(stream, viewModel.Items);
-                }
-            }
-        }
-
-        private static MainPageViewModel Load()
-        {
-            MainPageViewModel viewModel = new MainPageViewModel();
-            using (IsolatedStorageFile isf = IsolatedStorageFile.GetUserStoreForApplication())
-            {
-                if (isf.FileExists(Constants.StorageFileName))
-                {
-                    using (IsolatedStorageFileStream isfs = isf.OpenFile(Constants.StorageFileName, FileMode.Open))
-                    {
-                        XmlSerializer ser = new XmlSerializer(typeof(ObservableCollection<ListItem>));
-                        object obj = ser.Deserialize(isfs);
-
-                        if ((obj != null) && (obj is ObservableCollection<ListItem>))
-                        {
-                            viewModel.SetItems(obj as ObservableCollection<ListItem>);
-                        }
-                    }
-                }
-            }
-            return viewModel;
+            App.Current.ViewModel.ClearList();
         }
 
         private void TextBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
@@ -159,7 +111,7 @@ namespace ListaSpesa
 
             if (selectedListBoxItem.DataContext is ListItem)
             {
-                _vm.RemoveItem(selectedListBoxItem.DataContext as ListItem);
+                App.Current.ViewModel.RemoveItem(selectedListBoxItem.DataContext as ListItem);
             }
         }
 
@@ -176,12 +128,6 @@ namespace ListaSpesa
             appBarButtonSvuota.Click += ApplicationBarIconButton_Click;
             appBarButtonSvuota.Text = AppResources.Svuota;
 
-            ApplicationBarIconButton appBarButtonSalva =
-    new ApplicationBarIconButton(new
-    Uri("/Images/appbar.save.rest.png", UriKind.Relative));
-            appBarButtonSalva.Click += Save_Click;
-            appBarButtonSalva.Text = AppResources.Salva;
-
             ApplicationBarIconButton appBarButtonInfo =
 new ApplicationBarIconButton(new
 Uri("/Images/appbar.questionmark.rest.png", UriKind.Relative));
@@ -189,7 +135,6 @@ Uri("/Images/appbar.questionmark.rest.png", UriKind.Relative));
             appBarButtonInfo.Text = AppResources.Info;
 
             ApplicationBar.Buttons.Add(appBarButtonSvuota);
-            ApplicationBar.Buttons.Add(appBarButtonSalva);
             ApplicationBar.Buttons.Add(appBarButtonInfo);
         }
 

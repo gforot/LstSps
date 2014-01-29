@@ -1,5 +1,5 @@
-﻿Controllare che il salvataggio sia effettuato senza dover cliccare sul tasto Salva
-Eliminare il tasto Salva
+﻿* Controllare che il salvataggio sia effettuato senza dover cliccare sul tasto Salva
+* Eliminare il tasto Salva
 Valutare dove conviene salvare
 Gestire ordinamento della lista
 Migliorare la grafica

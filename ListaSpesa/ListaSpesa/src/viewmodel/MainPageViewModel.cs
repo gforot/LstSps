@@ -1,14 +1,15 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Windows;
+using GalaSoft.MvvmLight;
 using ListaSpesa.Commands;
 using ListaSpesa.Model;
 using ListaSpesa.Utils;
 
+
 namespace ListaSpesa.Viewmodel
 {
-    public class MainPageViewModel : INotifyPropertyChanged
+    public class MainPageViewModel : ViewModelBase
     {
         //Membri privati
         private ObservableCollection<ListItem> _listOfItems;
@@ -29,7 +30,7 @@ namespace ListaSpesa.Viewmodel
             set
             {
                 _newItemText = value;
-                OnPropertyChanged("NewItemText");
+                RaisePropertyChanged("NewItemText");
                 //Notifico che deve essere rivalutata la abilitazione del comando
                 AddItemCommand.RaiseCanExecuteChanged();
             }
@@ -40,7 +41,7 @@ namespace ListaSpesa.Viewmodel
             set
             {
                 _showInput = value;
-                OnPropertyChanged("ShowInput");
+                RaisePropertyChanged("ShowInput");
             }
         }
         public bool IsSpesaFinished
@@ -129,13 +130,12 @@ namespace ListaSpesa.Viewmodel
         #region Metodi privati
         private void RaiseSummaryChanged()
         {
-            OnPropertyChanged("Summary");
-
+            RaisePropertyChanged("Summary");
         }
 
         private void RaiseIsSpesaFinished()
         {
-            OnPropertyChanged("IsSpesaFinished");
+            RaisePropertyChanged("IsSpesaFinished");
         }
 
         private void ResetTextbox()
@@ -197,16 +197,5 @@ namespace ListaSpesa.Viewmodel
         }
         #endregion
 
-        #region INotifyPropertyChanged interface
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void OnPropertyChanged(string prpName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(prpName));
-            }
-        }
-        #endregion
     }
 }

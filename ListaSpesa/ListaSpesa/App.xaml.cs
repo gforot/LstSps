@@ -78,12 +78,17 @@ namespace ListaSpesa
                 // and consume battery power when the user is not using the phone.
                 PhoneApplicationService.Current.UserIdleDetectionMode = IdleDetectionMode.Disabled;
             }
-
         }
+
         // Code to execute when the application is launching (eg, from Start)
         // This code will not execute when the application is reactivated
         private void Application_Launching(object sender, LaunchingEventArgs e)
         {
+            //caricare qui il ViewModel?
+            if (ViewModel == null)
+            {
+                ViewModel = Datalayer.DataLayer.GetInstance().Load();
+            }
         }
 
         // Code to execute when the application is activated (brought to foreground)
@@ -102,7 +107,8 @@ namespace ListaSpesa
         // This code will not execute when the application is deactivated
         private void Application_Closing(object sender, ClosingEventArgs e)
         {
-           
+            //Inserire qui il salvataggio?
+            Datalayer.DataLayer.GetInstance().Save(ViewModel);
         }
 
         // Code to execute if a navigation fails
