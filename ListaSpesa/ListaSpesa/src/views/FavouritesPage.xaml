@@ -13,12 +13,9 @@
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="True">
-    <phone:PhoneApplicationPage.Resources>
-        <viewModels:FavouritesPageViewModel x:Key="viewModel" />
-    </phone:PhoneApplicationPage.Resources>
 
     <!--LayoutRoot is the root grid where all page content is placed-->
-    <Grid x:Name="LayoutRoot" Background="{StaticResource background}" DataContext="{StaticResource viewModel}">
+    <Grid x:Name="LayoutRoot" Background="{StaticResource background}" >
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>

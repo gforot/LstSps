@@ -3,13 +3,31 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using ListaSpesa.Model;
 using System.Linq;
+using GalaSoft.MvvmLight.Command;
+using Microsoft.Phone.Controls;
 
 namespace ListaSpesa.Viewmodels
 {
     public class FavouritesPageViewModel : ListItemViewModel
     {
-        #region Properties
+        public RelayCommand AddItemCommand { get; private set; }
 
+        #region Properties
+        #region NewItemText
+        private const string _newItemTextPrpName = "NewItemText";
+        private string _newItemText;
+        public string NewItemText
+        {
+            get { return _newItemText; }
+            set
+            {
+                _newItemText = value;
+                RaisePropertyChanged(_newItemTextPrpName);
+                //Notifico che deve essere rivalutata la abilitazione del comando
+                AddItemCommand.RaiseCanExecuteChanged();
+            }
+        }
+        #endregion
         #region ListOfItems
         private const string _listOfItemsPrpName = "ListOfItems";
         private readonly ObservableCollection<ListItem> _listOfItems;
@@ -24,6 +42,9 @@ namespace ListaSpesa.Viewmodels
         public FavouritesPageViewModel()
         {
             _listOfItems = new ObservableCollection<ListItem>();
+            
+            AddItemCommand = new RelayCommand(AddItem, CanAddItem);
+            NewItemText = string.Empty;
         }
 
         public void SetItems(ObservableCollection<ListItem> items)
@@ -63,6 +84,45 @@ namespace ListaSpesa.Viewmodels
             {
                 item.IsChecked = false;
             }
+        }
+
+        /// <summary>
+        /// Dice se è abilitato il button di aggiunta elemento alla spesa
+        /// </summary>
+        private bool CanAddItem()
+        {
+            return !string.IsNullOrEmpty(_newItemText);
+        }
+
+        /// <summary>
+        /// Aggiunge un elemento alla spesa
+        /// </summary>
+        private void AddItem()
+        {
+            AddItem(NewItemText);
+            ResetTextbox();
+        }
+
+        private void ResetTextbox()
+        {
+            NewItemText = string.Empty;
+        }
+
+        public void AddItem(string text)
+        {
+            ListItem li = new ListItem(text);
+            li.RemoveItemRequested += li_RemoveItemRequested;
+            AddItemToList(li);
+        }
+
+        void li_RemoveItemRequested(MenuItem item)
+        {
+            RemoveItem(item.DataContext as ListItem);
+        }
+
+        public void RemoveItem(ListItem li)
+        {
+            _listOfItems.Remove(li);
         }
     }
 }

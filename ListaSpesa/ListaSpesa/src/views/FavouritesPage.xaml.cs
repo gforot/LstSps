@@ -18,6 +18,8 @@ namespace ListaSpesa.src.views
         public FavouritesPage()
         {
             InitializeComponent();
+
+            BuildLocalizedApplicationBar();
             this.DataContext = App.Current.FavouritesViewModel;
         }
 
