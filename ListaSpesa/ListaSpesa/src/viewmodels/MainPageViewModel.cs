@@ -27,7 +27,6 @@ namespace ListaSpesa.Viewmodels
 
             AddItemCommand = new RelayCommand(AddItem, CanAddItem);
             NewItemText = string.Empty;
-            ShowInput = true;
         }
         #endregion
 
@@ -124,10 +123,15 @@ namespace ListaSpesa.Viewmodels
         /// </summary>
         private void AddItem()
         {
-            ListItem li = new ListItem(NewItemText);
+            AddItem(NewItemText);
+            ResetTextbox();
+        }
+
+        public void AddItem(string text)
+        {
+            ListItem li = new ListItem(text);
             li.RemoveItemRequested += li_RemoveItemRequested;
             AddItemToList(li);
-            ResetTextbox();
         }
 
         void li_RemoveItemRequested(MenuItem item)

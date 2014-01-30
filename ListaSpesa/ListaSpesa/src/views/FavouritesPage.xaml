@@ -21,18 +21,34 @@
     <Grid x:Name="LayoutRoot" Background="{StaticResource background}" DataContext="{StaticResource viewModel}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <!--TitlePanel contains the name of the application and page title-->
-        <StackPanel Grid.Row="0" Margin="12,17,0,28">
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
             <TextBlock x:Name="PageTitle" Text="{Binding Path=LocalizedResources.Favourites, Source={StaticResource LocalizedStrings}}" Margin="6,-8,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
-        <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            
+        <Grid Grid.Row="1" Margin="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="70"/>
+            </Grid.ColumnDefinitions>
+            <TextBox  TextChanged="TextBox_TextChanged" Text="{Binding NewItemText, Mode=TwoWay, UpdateSourceTrigger=Explicit}"  HorizontalAlignment="Stretch">
+                <TextBox.InputScope>
+                    <InputScope>
+                        <InputScopeName NameValue="Text" />
+                    </InputScope>
+                </TextBox.InputScope>
+            </TextBox>
+            <Button Grid.Column="1" Content="+" Command="{Binding AddItemCommand}" HorizontalAlignment="Stretch" />
         </Grid>
+
+        <Grid Grid.Row="2" HorizontalAlignment="Stretch" x:Name="ContentPanel"  Margin="12,0,12,5">
+            <ListBox SelectedIndex="-1" ItemTemplate="{StaticResource listItemTemplate}" ItemsSource="{Binding ListOfItems}" Name="listBox1" />
+        </Grid>
+
     </Grid>
 
 </phone:PhoneApplicationPage>
