@@ -97,20 +97,6 @@ namespace ListaSpesa.Viewmodels
         }
         #endregion
 
-        #region ShowInput
-        private const string _showInputPrpName = "ShowInput";
-        private bool _showInput;
-        public bool ShowInput
-        {
-            get { return _showInput; }
-            set
-            {
-                _showInput = value;
-                RaisePropertyChanged(_showInputPrpName);
-            }
-        }
-        #endregion
-
         #region IsSpesaEmpty
 
         private bool IsSpesaEmpty

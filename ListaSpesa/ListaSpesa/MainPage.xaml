@@ -18,7 +18,6 @@
 
     <Grid x:Name="LayoutRoot" Background="{StaticResource background}">
         <Grid.Resources>
-            
             <converters:SummaryToColorConverter x:Key="summaryToColorConverter" />
         </Grid.Resources>
         <Grid.RowDefinitions>
@@ -30,7 +29,7 @@
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="10,5,0,5">
             <TextBlock x:Name="PageTitle" Text="{Binding Path=LocalizedResources.ApplicationTitle, Source={StaticResource LocalizedStrings}}" Margin="6,-8,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
-        <Grid Visibility="{Binding ShowInput, Converter={StaticResource visibleToVisibilityConverter}}" Grid.Row="1" Margin="2">
+        <Grid Grid.Row="1" Margin="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition Width="70"/>

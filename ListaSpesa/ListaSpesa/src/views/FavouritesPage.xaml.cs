@@ -15,7 +15,6 @@ namespace ListaSpesa.src.views
         public FavouritesPage()
         {
             InitializeComponent();
-
             this.DataContext = App.Current.FavouritesViewModel;
         }
 
