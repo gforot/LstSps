@@ -117,8 +117,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AddToFavourites" xml:space="preserve">
+    <value>To Favourites</value>
+  </data>
   <data name="ApplicationTitle" xml:space="preserve">
     <value>Shopping list</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
   </data>
   <data name="DevelopedBy" xml:space="preserve">
     <value>Developed by Andrea Rota</value>

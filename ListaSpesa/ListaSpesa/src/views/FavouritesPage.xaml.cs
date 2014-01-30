@@ -15,6 +15,14 @@ namespace ListaSpesa.src.views
         public FavouritesPage()
         {
             InitializeComponent();
+
+            this.DataContext = App.Current.FavouritesViewModel;
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            App.Current.FavouritesViewModel.UncheckAll();
         }
     }
 }

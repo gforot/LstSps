@@ -1,11 +1,18 @@
 ﻿using System.Runtime.Serialization;
+using System.Xml.Serialization;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
+using ListaSpesa.Viewmodels;
+using Microsoft.Phone.Controls;
 
 namespace ListaSpesa.Model
 {
     [DataContract]
     public class ListItem : ViewModelBase
     {
+
+        public event RemoveItemEventHandler RemoveItemRequested;
+
         #region Constructors
         public ListItem()
             :this(string.Empty)
@@ -22,6 +29,8 @@ namespace ListaSpesa.Model
         {
             Text = text;
             _isChecked = isChecked;
+
+            RemoveItemCommand = new RelayCommand<MenuItem>((o) => RemoveItem(o), (o) => CanRemoveItem);
         }
         #endregion
 
@@ -61,5 +70,20 @@ namespace ListaSpesa.Model
         #endregion
 
         #endregion
+        [XmlIgnore()] 
+        public RelayCommand<MenuItem> RemoveItemCommand { get; private set; }
+
+        private bool CanRemoveItem
+        {
+            get { return true; }
+        }
+
+        private void RemoveItem(MenuItem item)
+        {
+            if (RemoveItemRequested != null)
+            {
+                RemoveItemRequested(item);
+            }
+        }
     }
 }

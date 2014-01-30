@@ -2,10 +2,11 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using ListaSpesa.Model;
+using System.Linq;
 
 namespace ListaSpesa.Viewmodels
 {
-    public class FavouritesPageViewModel : ViewModelBase
+    public class FavouritesPageViewModel : ListItemViewModel
     {
         #region Properties
 
@@ -20,7 +21,6 @@ namespace ListaSpesa.Viewmodels
         #endregion
         #endregion
 
-        
         public FavouritesPageViewModel()
         {
             _listOfItems = new ObservableCollection<ListItem>();
@@ -50,6 +50,19 @@ namespace ListaSpesa.Viewmodels
         {
             //RaiseSummaryChanged();
             //RaiseIsSpesaFinished();
+        }
+
+        public override bool IsAddToFavouritesVisible
+        {
+            get { return false; }
+        }
+
+        public void UncheckAll()
+        {
+            foreach (ListItem item in _listOfItems)
+            {
+                item.IsChecked = false;
+            }
         }
     }
 }

@@ -1,15 +1,21 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Windows.Controls;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using ListaSpesa.Commands;
 using ListaSpesa.Model;
 using ListaSpesa.Utils;
+using Microsoft.Phone.Controls;
 
 namespace ListaSpesa.Viewmodels
 {
-    public class MainPageViewModel : ViewModelBase
+    public delegate void RemoveItemEventHandler(MenuItem item);
+    public class MainPageViewModel : ListItemViewModel
     {
+        
         #region Costruttore
         /// <summary>
         /// Costruttore
@@ -19,7 +25,7 @@ namespace ListaSpesa.Viewmodels
             _listOfItems = new ObservableCollection<ListItem>();
             _listOfItems.CollectionChanged += _listOfItems_CollectionChanged;
 
-            AddItemCommand = new DelegateCommand((o) => AddItem(), (o) => CanAddItem);
+            AddItemCommand = new RelayCommand(AddItem, CanAddItem);
             NewItemText = string.Empty;
             ShowInput = true;
         }
@@ -35,6 +41,13 @@ namespace ListaSpesa.Viewmodels
         {
             get { return _listOfItems; }
         }
+
+        public override bool IsAddToFavouritesVisible
+        {
+            get { return true; }
+        }
+
+
         #endregion
 
         #region IsSpesaFinished
@@ -110,14 +123,14 @@ namespace ListaSpesa.Viewmodels
         #endregion
 
         #region Commands
-        public DelegateCommand AddItemCommand { get; private set; }
+        public RelayCommand AddItemCommand { get; private set; }
 
         /// <summary>
         /// Dice se è abilitato il button di aggiunta elemento alla spesa
         /// </summary>
-        private bool CanAddItem
+        private bool CanAddItem()
         {
-            get { return !string.IsNullOrEmpty(_newItemText); }
+            return !string.IsNullOrEmpty(_newItemText); 
         }
 
         /// <summary>
@@ -125,8 +138,15 @@ namespace ListaSpesa.Viewmodels
         /// </summary>
         private void AddItem()
         {
-            AddItemToList(new ListItem(NewItemText));
+            ListItem li = new ListItem(NewItemText);
+            li.RemoveItemRequested += li_RemoveItemRequested;
+            AddItemToList(li);
             ResetTextbox();
+        }
+
+        void li_RemoveItemRequested(MenuItem item)
+        {
+            RemoveItem(item.DataContext as ListItem);
         }
         #endregion
 
@@ -201,5 +221,7 @@ namespace ListaSpesa.Viewmodels
             RaiseIsSpesaFinished();
         }
         #endregion
+
+
     }
 }

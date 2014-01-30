@@ -6,15 +6,40 @@
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:viewModels="clr-namespace:ListaSpesa.Viewmodels"
+    xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit" 
+    xmlns:converters="clr-namespace:ListaSpesa.Converters" 
     >
 
     <!--Application Resources-->
     <Application.Resources>
+        <converters:VisibleToVisibilityConverter x:Key="visibleToVisibilityConverter" />
+        <converters:CheckedToColorConverter x:Key="checkedToColorConverter" />
         <local:LocalizedStrings xmlns:local="clr-namespace:ListaSpesa.Utils"  x:Key="LocalizedStrings"/>
         <LinearGradientBrush x:Key="background" EndPoint="0.5,1" StartPoint="0.5,0">
             <GradientStop Color="#FF7A7979" Offset="0"/>
             <GradientStop Color="#FFE89E9E" Offset="0.999"/>
         </LinearGradientBrush>
+        <DataTemplate x:Key="listItemTemplate">
+            <Border HorizontalAlignment="Stretch" Margin="2" BorderBrush="{Binding IsChecked, Converter={StaticResource checkedToColorConverter}}" BorderThickness="2" CornerRadius="5" >
+                <controls:ContextMenuService.ContextMenu>
+                    <controls:ContextMenu IsEnabled="True" >
+                        <controls:MenuItem Header="{Binding Path=LocalizedResources.Delete, Source={StaticResource LocalizedStrings}}"
+                                           Command="{Binding RemoveItemCommand}" 
+                                           CommandParameter="{Binding RelativeSource={RelativeSource Self}}"/>
+                        <controls:MenuItem Header="{Binding Path=LocalizedResources.AddToFavourites, Source={StaticResource LocalizedStrings}}"
+                                           Command="{Binding AddToFavouritesCommand}" 
+                                           CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
+                                           Visibility="{Binding ElementName=listBox1, 
+                            Path=DataContext.IsAddToFavouritesVisible, Converter={StaticResource visibleToVisibilityConverter}}"
+                                           />
+                    </controls:ContextMenu>
+                </controls:ContextMenuService.ContextMenu>
+                <StackPanel Orientation="Horizontal" Width="600">
+                    <CheckBox  IsChecked="{Binding IsChecked, Mode=TwoWay}"/>
+                    <TextBlock Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Text="{Binding Text}"/>
+                </StackPanel>
+            </Border>
+        </DataTemplate>
     </Application.Resources>
 
     <Application.ApplicationLifetimeObjects>

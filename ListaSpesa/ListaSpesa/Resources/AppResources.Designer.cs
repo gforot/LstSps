@@ -61,11 +61,29 @@ namespace ListaSpesa.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to To Favourites.
+        /// </summary>
+        public static string AddToFavourites {
+            get {
+                return ResourceManager.GetString("AddToFavourites", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Shopping list.
         /// </summary>
         public static string ApplicationTitle {
             get {
                 return ResourceManager.GetString("ApplicationTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        public static string Delete {
+            get {
+                return ResourceManager.GetString("Delete", resourceCulture);
             }
         }
         

@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.IO.IsolatedStorage;
 using System.Xml.Serialization;
@@ -31,7 +32,8 @@ namespace ListaSpesa.Datalayer
                 {
                     using (IsolatedStorageFileStream isfs = isf.OpenFile(Constants.StorageFileName, FileMode.Open))
                     {
-                        XmlSerializer ser = new XmlSerializer(typeof(ObservableCollection<ListItem>));
+                        Type t = typeof(ObservableCollection<ListItem>);
+                        XmlSerializer ser = new XmlSerializer(t);
                         object obj = ser.Deserialize(isfs);
 
                         if ((obj != null) && (obj is ObservableCollection<ListItem>))

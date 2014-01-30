@@ -6,7 +6,7 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-    xmlns:Converters="clr-namespace:ListaSpesa.Converters" 
+    xmlns:converters="clr-namespace:ListaSpesa.Converters" 
     xmlns:Controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit" 
     xmlns:ctrl="clr-namespace:RateMyApp.Controls;assembly=RateMyApp"
     mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="768"
@@ -16,39 +16,17 @@
     SupportedOrientations="PortraitOrLandscape" Orientation="Portrait"
     shell:SystemTray.IsVisible="True">
 
-    <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="{StaticResource background}">
         <Grid.Resources>
-            <Converters:VisibleToVisibilityConverter x:Key="visibleToVisibilityConverter" />
-            <Converters:CheckedToColorConverter x:Key="checkedToColorConverter" />
-            <Converters:SummaryToColorConverter x:Key="summaryToColorConverter" />
-            <DataTemplate x:Key="listItemTemplate">
-
-                <Border HorizontalAlignment="Stretch" Margin="2" BorderBrush="{Binding IsChecked, Converter={StaticResource checkedToColorConverter}}" BorderThickness="2" CornerRadius="5" >
-
-                    <Controls:ContextMenuService.ContextMenu>
-                        <Controls:ContextMenu IsEnabled="True" >
-                            <Controls:MenuItem Header="Elimina" Click="RemoveItem_Click"/>
-                        </Controls:ContextMenu>
-                    </Controls:ContextMenuService.ContextMenu>
-                    <StackPanel Orientation="Horizontal" Width="600">
-
-                        <CheckBox  IsChecked="{Binding IsChecked, Mode=TwoWay}"/>
-                        <TextBlock Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Text="{Binding Text}"/>
-                    </StackPanel>
-                </Border>
-            </DataTemplate>
+            
+            <converters:SummaryToColorConverter x:Key="summaryToColorConverter" />
         </Grid.Resources>
-
-
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-
-        <!--TitlePanel contains the name of the application and page title-->
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="10,5,0,5">
             <TextBlock x:Name="PageTitle" Text="{Binding Path=LocalizedResources.ApplicationTitle, Source={StaticResource LocalizedStrings}}" Margin="6,-8,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
@@ -72,7 +50,6 @@
         <Grid Grid.Row="3" HorizontalAlignment="Stretch" x:Name="ContentPanel"  Margin="12,0,12,5">
             <ListBox SelectedIndex="-1" ItemTemplate="{StaticResource listItemTemplate}" ItemsSource="{Binding ListOfItems}" Name="listBox1" />
         </Grid>
-
         <ctrl:FeedbackOverlay x:Name="FeedbackOverlay"
                               Grid.RowSpan="4"
                               FeedbackTo="rotandrea@gmail.com"
