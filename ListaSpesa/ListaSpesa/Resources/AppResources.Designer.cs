@@ -61,6 +61,24 @@ namespace ListaSpesa.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add All.
+        /// </summary>
+        public static string AddAll {
+            get {
+                return ResourceManager.GetString("AddAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add Selected.
+        /// </summary>
+        public static string AddSelected {
+            get {
+                return ResourceManager.GetString("AddSelected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to To Favourites.
         /// </summary>
         public static string AddToFavourites {

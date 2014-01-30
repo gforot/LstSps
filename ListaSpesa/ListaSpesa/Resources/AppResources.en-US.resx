@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AddAll" xml:space="preserve">
+    <value>Add all</value>
+  </data>
+  <data name="AddSelected" xml:space="preserve">
+    <value>Add selected</value>
+  </data>
   <data name="AddToFavourites" xml:space="preserve">
     <value>To Favourites</value>
   </data>
