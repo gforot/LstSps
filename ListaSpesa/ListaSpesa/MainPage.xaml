@@ -9,6 +9,8 @@
     xmlns:converters="clr-namespace:ListaSpesa.Converters" 
     xmlns:Controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit" 
     xmlns:ctrl="clr-namespace:RateMyApp.Controls;assembly=RateMyApp"
+    xmlns:telerikPrimitives="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Primitives"
+    xmlns:telerikListBox="clr-namespace:Telerik.Windows.Controls.DataBoundListBox;assembly=Telerik.Windows.Controls.Primitives"
     mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="768"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -46,8 +48,12 @@
         <StackPanel Grid.Row="2" Orientation="Horizontal">
             <TextBlock Foreground="{Binding IsSpesaFinished, Converter={StaticResource summaryToColorConverter}}" Text="{Binding Summary}" Margin="12,5,12,5" HorizontalAlignment="Stretch"/>
         </StackPanel>
-        <Grid Grid.Row="3" HorizontalAlignment="Stretch" x:Name="ContentPanel"  Margin="12,0,12,5">
-            <ListBox SelectedIndex="-1" ItemTemplate="{StaticResource listItemTemplate}" ItemsSource="{Binding ListOfItems}" Name="listBox1" />
+        <!--<Grid Grid.Row="3" HorizontalAlignment="Stretch" x:Name="ContentPanel"  Margin="12,0,12,5">
+            <ListBox SelectedIndex="-1" ItemTemplate="{StaticResource listItemTemplate}" ItemsSource="{Binding ListOfItems}" Name="listBox1_" />
+        </Grid>-->
+
+        <Grid Grid.Row="3" HorizontalAlignment="Stretch" x:Name="TelerikListBoxPanel"  Margin="12,0,12,5">
+            <telerikPrimitives:RadDataBoundListBox IsItemReorderEnabled="True" ItemTemplate="{StaticResource listItemTemplate}" ItemsSource="{Binding ListOfItems}" Name="listBox1" />
         </Grid>
         <ctrl:FeedbackOverlay x:Name="FeedbackOverlay"
                               Grid.RowSpan="4"

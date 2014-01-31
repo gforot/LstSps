@@ -153,6 +153,9 @@
   <data name="MancanoN" xml:space="preserve">
     <value>Miss {0} elements</value>
   </data>
+  <data name="RemoveSelected" xml:space="preserve">
+    <value>Remove Selected</value>
+  </data>
   <data name="Salva" xml:space="preserve">
     <value>Save</value>
   </data>

@@ -153,6 +153,9 @@
   <data name="MancanoN" xml:space="preserve">
     <value>Mancano ancora {0} elementi!</value>
   </data>
+  <data name="RemoveSelected" xml:space="preserve">
+    <value>Elimina Selezionati</value>
+  </data>
   <data name="Salva" xml:space="preserve">
     <value>Salva</value>
   </data>

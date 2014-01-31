@@ -73,25 +73,6 @@ namespace ListaSpesa
             }
         }
 
-        #region Context Menu
-
-        private void RemoveItem_Click(object sender, RoutedEventArgs e)
-        {
-            ListBoxItem selectedListBoxItem = this.listBox1.ItemContainerGenerator.ContainerFromItem(
-                (sender as MenuItem).DataContext) as ListBoxItem;
-            if (selectedListBoxItem == null)
-            {
-                return;
-            }
-
-            if (selectedListBoxItem.DataContext is ListItem)
-            {
-                App.Current.ViewModel.RemoveItem(selectedListBoxItem.DataContext as ListItem);
-            }
-        }
-
-        #endregion
-
         #region ApplicationBar
 
         private void BuildLocalizedApplicationBar()
@@ -106,6 +87,15 @@ namespace ListaSpesa
                 Uri("/Images/appbar.cancel.rest.png", UriKind.Relative));
             appBarButtonEmpty.Click += appBarButtonEmpty_Click;
             appBarButtonEmpty.Text = AppResources.Svuota;
+            #endregion
+
+            #region Remove Selected
+            ApplicationBarIconButton appBarButtonRemoveSelected =
+                new ApplicationBarIconButton(new
+                Uri("/Toolkit.Content/ApplicationBar.Delete.png", UriKind.Relative));
+
+            appBarButtonRemoveSelected.Click += appBarButtonRemoveSelected_Click;
+            appBarButtonRemoveSelected.Text = AppResources.RemoveSelected;
             #endregion
 
             #region Favourites
@@ -123,8 +113,14 @@ namespace ListaSpesa
             #endregion
 
             ApplicationBar.Buttons.Add(appBarButtonEmpty);
+            ApplicationBar.Buttons.Add(appBarButtonRemoveSelected);
             ApplicationBar.Buttons.Add(appBarButtonFavs);
             ApplicationBar.Buttons.Add(appBarButtonInfo);
+        }
+
+        void appBarButtonRemoveSelected_Click(object sender, EventArgs e)
+        {
+            App.Current.ViewModel.RemoveSelected();
         }
 
         void appBarButtonFavs_Click(object sender, EventArgs e)

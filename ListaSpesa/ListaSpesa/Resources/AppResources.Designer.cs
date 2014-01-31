@@ -169,6 +169,15 @@ namespace ListaSpesa.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Remove Selected.
+        /// </summary>
+        public static string RemoveSelected {
+            get {
+                return ResourceManager.GetString("RemoveSelected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save.
         /// </summary>
         public static string Salva {

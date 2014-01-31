@@ -81,6 +81,8 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="src\model\IdGenerator.cs" />
+    <Compile Include="src\utils\ExtensionsMethods.cs" />
     <Compile Include="src\viewmodels\FavouritesPageViewModel.cs" />
     <Compile Include="src\viewmodels\ListItemViewModel.cs" />
     <Compile Include="src\views\FavouritesPage.xaml.cs">

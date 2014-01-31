@@ -36,10 +36,15 @@ namespace ListaSpesa.Viewmodels
         private const string _listOfItemsPrpName = "ListOfItems";
         private readonly ObservableCollection<ListItem> _listOfItems;
 
-        public ObservableCollection<ListItem> ListOfItems
+        public override ObservableCollection<ListItem> ListOfItems
         {
             get { return _listOfItems; }
         }
+
+        //public ObservableCollection<ListItem> ListOfItems
+        //{
+        //    get { return _listOfItems; }
+        //}
 
         public override bool IsAddToFavouritesVisible
         {
@@ -162,6 +167,12 @@ namespace ListaSpesa.Viewmodels
         {
             _listOfItems.Remove(li);
         }
+
+        public void RemoveSelected()
+        {
+            _listOfItems.Remove(li => li.IsChecked);
+        }
+
         #endregion
 
         #region Metodi privati
