@@ -43,10 +43,10 @@ namespace ListaSpesa
                     var tileData = new FlipTileData();
                     tileData.Title = AppResources.ApplicationTitle;
                     tileData.BackContent = "";
-                    //tileData.BackgroundImage = new Uri("/Icons/173x173.png", UriKind.Relative);
+                    tileData.BackgroundImage = new Uri("/Icons/173x173.png", UriKind.Relative);
                     tileData.BackBackgroundImage = new Uri("/Icons/173x173.png", UriKind.Relative);
                     tileData.WideBackContent = "";
-                    //tileData.WideBackgroundImage = new Uri("/Icons/346x173.png", UriKind.Relative);
+                    tileData.WideBackgroundImage = new Uri("/Icons/346x173.png", UriKind.Relative);
                     tileData.WideBackBackgroundImage = new Uri("/Icons/346x173.png", UriKind.Relative);
                     Debug.WriteLine("Activating live tile: " + Mangopollo.Utils.CanUseLiveTiles);
                     tileId.Update(tileData);
