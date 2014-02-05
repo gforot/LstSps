@@ -25,11 +25,9 @@ namespace ListaSpesa
         {
             InitializeComponent();
             BuildLocalizedApplicationBar();
-
             CreateTiles();
 
             this.DataContext = App.Current.ViewModel;
-
             FeedbackOverlay.VisibilityChanged += FeedbackOverlay_VisibilityChanged;
         }
 
@@ -112,6 +110,15 @@ namespace ListaSpesa
             appBarButtonInfo.Text = AppResources.Info;
             #endregion
 
+            #region Edit
+
+            ApplicationBarIconButton appBarButtonEdit =
+    new ApplicationBarIconButton(new Uri("/Images/appbar.questionmark.rest.png", UriKind.Relative));
+            appBarButtonEdit.Click += appBarButtonEdit_Click;
+            appBarButtonEdit.Text = AppResources.Edit;
+
+            #endregion
+
             ApplicationBar.Buttons.Add(appBarButtonEmpty);
             ApplicationBar.Buttons.Add(appBarButtonRemoveSelected);
             ApplicationBar.Buttons.Add(appBarButtonFavs);
@@ -136,6 +143,12 @@ namespace ListaSpesa
         void appBarButtonEmpty_Click(object sender, EventArgs e)
         {
             App.Current.ViewModel.ClearList();
+        }
+
+        void appBarButtonEdit_Click(object sender, EventArgs e)
+        {
+            //edit click
+            App.Current.ViewModel.Editing = true;
         }
         #endregion
 

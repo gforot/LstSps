@@ -48,10 +48,6 @@
         <StackPanel Grid.Row="2" Orientation="Horizontal">
             <TextBlock Foreground="{Binding IsSpesaFinished, Converter={StaticResource summaryToColorConverter}}" Text="{Binding Summary}" Margin="12,5,12,5" HorizontalAlignment="Stretch"/>
         </StackPanel>
-        <!--<Grid Grid.Row="3" HorizontalAlignment="Stretch" x:Name="ContentPanel"  Margin="12,0,12,5">
-            <ListBox SelectedIndex="-1" ItemTemplate="{StaticResource listItemTemplate}" ItemsSource="{Binding ListOfItems}" Name="listBox1_" />
-        </Grid>-->
-
         <Grid Grid.Row="3" HorizontalAlignment="Stretch" x:Name="TelerikListBoxPanel"  Margin="12,0,12,5">
             <telerikPrimitives:RadDataBoundListBox IsItemReorderEnabled="True" ItemTemplate="{StaticResource listItemTemplate}" ItemsSource="{Binding ListOfItems}" Name="listBox1" />
         </Grid>

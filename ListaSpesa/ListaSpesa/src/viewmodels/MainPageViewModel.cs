@@ -66,6 +66,27 @@ namespace ListaSpesa.Viewmodels
         }
         #endregion
 
+        #region Editing
+
+        private const string _editingPrpName = "Editing";
+        private bool _editing;
+        public bool Editing
+        {
+            get { return _editing; }
+            set
+            {
+                _editing = value;
+                RaiseEditingChanged();
+            }
+        }
+
+        private void RaiseEditingChanged()
+        {
+            RaisePropertyChanged(_editingPrpName);
+        }
+
+        #endregion
+
         #region Summary
         private const string _summaryPrpName = "Summary";
         public string Summary
@@ -217,7 +238,5 @@ namespace ListaSpesa.Viewmodels
             RaiseIsSpesaFinished();
         }
         #endregion
-
-
     }
 }
