@@ -15,7 +15,8 @@ namespace ListaSpesa.Viewmodels
     public delegate void RemoveItemEventHandler(MenuItem item);
     public class MainPageViewModel : ListItemViewModel
     {
-        
+        public event EventHandler CloseItemReorderPopupRequired;
+
         #region Costruttore
         /// <summary>
         /// Costruttore
@@ -26,12 +27,14 @@ namespace ListaSpesa.Viewmodels
             _listOfItems.CollectionChanged += _listOfItems_CollectionChanged;
 
             AddItemCommand = new RelayCommand(AddItem, CanAddItem);
-            TestCommand = new RelayCommand(Test);
+            RemoveItemCommand = new RelayCommand(RemoveItem);
             NewItemText = string.Empty;
         }
         #endregion
 
         #region Properties
+
+        public ListItem PivotItem { get; set; }
 
         #region ListOfItems
         private const string _listOfItemsPrpName = "ListOfItems";
@@ -112,10 +115,17 @@ namespace ListaSpesa.Viewmodels
         public RelayCommand AddItemCommand { get; private set; }
 
         public RelayCommand TestCommand { get; private set; }
-
-        private void Test()
+        public RelayCommand RemoveItemCommand { get; private set; }
+        private void RemoveItem()
         {
-
+            if (PivotItem != null)
+            {
+                RemoveItem(PivotItem);
+                if (CloseItemReorderPopupRequired != null)
+                {
+                    CloseItemReorderPopupRequired(this, new EventArgs());
+                }
+            }
         }
 
         /// <summary>

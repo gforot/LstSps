@@ -24,6 +24,7 @@
                 <Setter Property="Background" Value="#00ffffff"/>
                 <Setter Property="HorizontalAlignment" Value="Right"/>
                 <Setter Property="VerticalAlignment" Value="Bottom"/>
+                
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="telerikListBox:ItemReorderControl">
@@ -99,7 +100,7 @@
                                         PressedStateImageSource="Images/appbar.cancel.rest.png"
                                         DisabledStateImageSource="Images/appbar.cancel.rest.png"
                             x:Name="PART_DeleteButton"
-                            Command="{Binding TestCommand}"
+                            Command="{Binding RemoveItemCommand}"
                             >
                                         <telerikPrimitives:RadImageButton.RenderTransform>
                                             <RotateTransform  x:Name="DeleteButtonRotate" />
@@ -151,10 +152,11 @@
         <Grid Grid.Row="3" HorizontalAlignment="Stretch" x:Name="TelerikListBoxPanel"  Margin="12,0,12,5">
             <telerikPrimitives:RadDataBoundListBox 
                 ItemReorderControlStyle="{StaticResource itemReorderStyle}"
+                
                 IsItemReorderEnabled="True" 
                 ItemTemplate="{StaticResource listItemTemplate}" 
                 ItemsSource="{Binding ListOfItems}" 
-                SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+                ItemReorderStateChanged="lb_ItemReorderStateChanged"
                 Name="lb" />
         </Grid>
         <ctrl:FeedbackOverlay x:Name="FeedbackOverlay"

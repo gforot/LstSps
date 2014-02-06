@@ -28,7 +28,14 @@ namespace ListaSpesa
             CreateTiles();
 
             this.DataContext = App.Current.ViewModel;
+            App.Current.ViewModel.CloseItemReorderPopupRequired += ViewModel_CloseItemReorderPopupRequired;
             FeedbackOverlay.VisibilityChanged += FeedbackOverlay_VisibilityChanged;
+
+        }
+
+        void ViewModel_CloseItemReorderPopupRequired(object sender, EventArgs e)
+        {
+            CloseItemReorderPopup();
         }
 
         private void CreateTiles()
@@ -121,6 +128,23 @@ namespace ListaSpesa
             App.Current.ViewModel.ClearList();
         }
         #endregion
+
+        private void lb_ItemReorderStateChanged(object sender, Telerik.Windows.Controls.ItemReorderStateChangedEventArgs e)
+        {
+            if (e.PivotItem.DataContext is ListItem)
+            {
+                App.Current.ViewModel.PivotItem = e.PivotItem.DataContext as ListItem;
+            }
+            else
+            {
+                App.Current.ViewModel.PivotItem = null;
+            }
+        }
+
+        private void CloseItemReorderPopup()
+        {
+            lb.ActivateItemReorderForItem(null);
+        }
 
     }
 }
