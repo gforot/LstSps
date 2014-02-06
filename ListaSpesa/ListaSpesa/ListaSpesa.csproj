@@ -145,6 +145,8 @@
     <Content Include="Icons\346x173.png" />
     <Content Include="Icons\99x99.png" />
     <Content Include="Images\appbar.favs.rest.png" />
+    <Content Include="Images\arrow2_down_blue.png" />
+    <Content Include="Images\arrow2_up_blue.png" />
     <Content Include="README_FIRST.txt" />
     <Content Include="todo.txt" />
     <Content Include="Toolkit.Content\ApplicationBar.Add.png" />

@@ -17,10 +17,110 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="PortraitOrLandscape" Orientation="Portrait"
     shell:SystemTray.IsVisible="True">
-
     <Grid x:Name="LayoutRoot" Background="{StaticResource background}">
         <Grid.Resources>
             <converters:SummaryToColorConverter x:Key="summaryToColorConverter" />
+            <Style x:Key="itemReorderStyle" TargetType="telerikListBox:ItemReorderControl">
+                <Setter Property="Background" Value="#00ffffff"/>
+                <Setter Property="HorizontalAlignment" Value="Right"/>
+                <Setter Property="VerticalAlignment" Value="Bottom"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="telerikListBox:ItemReorderControl">
+                            <Border x:Name="PART_LayoutRoot"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        Background="{TemplateBinding Background}">
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="ListBoxOrientationStates">
+                                        <VisualState x:Name="Vertical">
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_ButtonMoveUp" Storyboard.TargetProperty="(Grid.Column)">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="0"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="MoveUpButtonRotate" Storyboard.TargetProperty="Angle">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="0"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_DeleteButton" Storyboard.TargetProperty="(Grid.Column)">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="1"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DeleteButtonRotate" Storyboard.TargetProperty="Angle">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="0"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_ButtonMoveDown" Storyboard.TargetProperty="(Grid.Column)">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="2"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="MoveDownButtonRotate" Storyboard.TargetProperty="Angle">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="0"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="Horizontal">
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_ButtonMoveUp" Storyboard.TargetProperty="(Grid.Column)">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="2"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="MoveUpButtonRotate" Storyboard.TargetProperty="Angle">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="-90"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_DeleteButton" Storyboard.TargetProperty="(Grid.Column)">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="1"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DeleteButtonRotate" Storyboard.TargetProperty="Angle">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="-90"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_ButtonMoveDown" Storyboard.TargetProperty="(Grid.Column)">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="0"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="MoveDownButtonRotate" Storyboard.TargetProperty="Angle">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="-90"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                                <Grid x:Name="ButtonsGrid">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <telerikPrimitives:RadImageButton
+                                        RestStateImageSource="Images/arrow2_down_blue.png"
+                                        PressedStateImageSource="Images/arrow2_down_blue.png"
+                                        DisabledStateImageSource="Images/arrow2_down_blue.png"
+                            x:Name="PART_ButtonMoveUp">
+                                        <telerikPrimitives:RadImageButton.RenderTransform>
+                                            <RotateTransform x:Name="MoveUpButtonRotate"/>
+                                        </telerikPrimitives:RadImageButton.RenderTransform>
+                                    </telerikPrimitives:RadImageButton>
+                                    <telerikPrimitives:RadImageButton Grid.Column="1"
+                                    RestStateImageSource="Images/appbar.cancel.rest.png"
+                                        PressedStateImageSource="Images/appbar.cancel.rest.png"
+                                        DisabledStateImageSource="Images/appbar.cancel.rest.png"
+                            x:Name="PART_DeleteButton"
+                            Command="{Binding TestCommand}"
+                            >
+                                        <telerikPrimitives:RadImageButton.RenderTransform>
+                                            <RotateTransform  x:Name="DeleteButtonRotate" />
+                                        </telerikPrimitives:RadImageButton.RenderTransform>
+                                    </telerikPrimitives:RadImageButton>
+                                    <telerikPrimitives:RadImageButton Grid.Column="2"
+                                    RestStateImageSource="Images/arrow2_up_blue.png"
+                                        PressedStateImageSource="Images/arrow2_up_blue.png"
+                                        DisabledStateImageSource="Images/arrow2_up_blue.png"
+                            x:Name="PART_ButtonMoveDown"
+                            >
+                                        <telerikPrimitives:RadImageButton.RenderTransform>
+                                            <RotateTransform x:Name="MoveDownButtonRotate"/>
+                                        </telerikPrimitives:RadImageButton.RenderTransform>
+                                    </telerikPrimitives:RadImageButton>
+                                </Grid>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
         </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -49,12 +149,18 @@
             <TextBlock Foreground="{Binding IsSpesaFinished, Converter={StaticResource summaryToColorConverter}}" Text="{Binding Summary}" Margin="12,5,12,5" HorizontalAlignment="Stretch"/>
         </StackPanel>
         <Grid Grid.Row="3" HorizontalAlignment="Stretch" x:Name="TelerikListBoxPanel"  Margin="12,0,12,5">
-            <telerikPrimitives:RadDataBoundListBox IsItemReorderEnabled="True" ItemTemplate="{StaticResource listItemTemplate}" ItemsSource="{Binding ListOfItems}" Name="listBox1" />
+            <telerikPrimitives:RadDataBoundListBox 
+                ItemReorderControlStyle="{StaticResource itemReorderStyle}"
+                IsItemReorderEnabled="True" 
+                ItemTemplate="{StaticResource listItemTemplate}" 
+                ItemsSource="{Binding ListOfItems}" 
+                SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+                Name="lb" />
         </Grid>
         <ctrl:FeedbackOverlay x:Name="FeedbackOverlay"
                               Grid.RowSpan="4"
                               FeedbackTo="rotandrea@gmail.com"
-                              ApplicationName="Lista Spesa"
+                              ApplicationName="{Binding Path=LocalizedResources.ApplicationTitle, Source={StaticResource LocalizedStrings}}"
                               CompanyName="gforot"/>
     </Grid>
 

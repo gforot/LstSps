@@ -43,7 +43,7 @@
         </Grid>
 
         <Grid Grid.Row="2" HorizontalAlignment="Stretch" x:Name="ContentPanel"  Margin="12,0,12,5">
-            <ListBox SelectedIndex="-1" ItemTemplate="{StaticResource listItemTemplate}" ItemsSource="{Binding ListOfItems}" Name="listBox1" />
+            <ListBox SelectedIndex="-1" ItemTemplate="{StaticResource listItemTemplate}" ItemsSource="{Binding ListOfItems}" Name="lb" />
         </Grid>
 
     </Grid>

@@ -87,15 +87,6 @@ namespace ListaSpesa
             appBarButtonEmpty.Text = AppResources.Svuota;
             #endregion
 
-            #region Remove Selected
-            ApplicationBarIconButton appBarButtonRemoveSelected =
-                new ApplicationBarIconButton(new
-                Uri("/Toolkit.Content/ApplicationBar.Delete.png", UriKind.Relative));
-
-            appBarButtonRemoveSelected.Click += appBarButtonRemoveSelected_Click;
-            appBarButtonRemoveSelected.Text = AppResources.RemoveSelected;
-            #endregion
-
             #region Favourites
             ApplicationBarIconButton appBarButtonFavs =
                  new ApplicationBarIconButton(new Uri("/Images/appbar.favs.rest.png", UriKind.Relative));
@@ -110,24 +101,9 @@ namespace ListaSpesa
             appBarButtonInfo.Text = AppResources.Info;
             #endregion
 
-            #region Edit
-
-            ApplicationBarIconButton appBarButtonEdit =
-    new ApplicationBarIconButton(new Uri("/Images/appbar.questionmark.rest.png", UriKind.Relative));
-            appBarButtonEdit.Click += appBarButtonEdit_Click;
-            appBarButtonEdit.Text = AppResources.Edit;
-
-            #endregion
-
             ApplicationBar.Buttons.Add(appBarButtonEmpty);
-            ApplicationBar.Buttons.Add(appBarButtonRemoveSelected);
             ApplicationBar.Buttons.Add(appBarButtonFavs);
             ApplicationBar.Buttons.Add(appBarButtonInfo);
-        }
-
-        void appBarButtonRemoveSelected_Click(object sender, EventArgs e)
-        {
-            App.Current.ViewModel.RemoveSelected();
         }
 
         void appBarButtonFavs_Click(object sender, EventArgs e)
@@ -143,12 +119,6 @@ namespace ListaSpesa
         void appBarButtonEmpty_Click(object sender, EventArgs e)
         {
             App.Current.ViewModel.ClearList();
-        }
-
-        void appBarButtonEdit_Click(object sender, EventArgs e)
-        {
-            //edit click
-            App.Current.ViewModel.Editing = true;
         }
         #endregion
 

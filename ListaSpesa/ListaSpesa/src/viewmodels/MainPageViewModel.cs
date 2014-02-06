@@ -26,6 +26,7 @@ namespace ListaSpesa.Viewmodels
             _listOfItems.CollectionChanged += _listOfItems_CollectionChanged;
 
             AddItemCommand = new RelayCommand(AddItem, CanAddItem);
+            TestCommand = new RelayCommand(Test);
             NewItemText = string.Empty;
         }
         #endregion
@@ -64,27 +65,6 @@ namespace ListaSpesa.Viewmodels
         {
             RaisePropertyChanged(_isSpesaFinishedPrpName);
         }
-        #endregion
-
-        #region Editing
-
-        private const string _editingPrpName = "Editing";
-        private bool _editing;
-        public bool Editing
-        {
-            get { return _editing; }
-            set
-            {
-                _editing = value;
-                RaiseEditingChanged();
-            }
-        }
-
-        private void RaiseEditingChanged()
-        {
-            RaisePropertyChanged(_editingPrpName);
-        }
-
         #endregion
 
         #region Summary
@@ -131,6 +111,13 @@ namespace ListaSpesa.Viewmodels
         #region Commands
         public RelayCommand AddItemCommand { get; private set; }
 
+        public RelayCommand TestCommand { get; private set; }
+
+        private void Test()
+        {
+
+        }
+
         /// <summary>
         /// Dice se è abilitato il button di aggiunta elemento alla spesa
         /// </summary>
@@ -154,6 +141,8 @@ namespace ListaSpesa.Viewmodels
             li.RemoveItemRequested += li_RemoveItemRequested;
             AddItemToList(li);
         }
+
+
 
         void li_RemoveItemRequested(MenuItem item)
         {
@@ -182,11 +171,6 @@ namespace ListaSpesa.Viewmodels
         public void RemoveItem(ListItem li)
         {
             _listOfItems.Remove(li);
-        }
-
-        public void RemoveSelected()
-        {
-            _listOfItems.Remove(li => li.IsChecked);
         }
 
         #endregion
