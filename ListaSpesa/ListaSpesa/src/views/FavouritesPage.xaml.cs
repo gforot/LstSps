@@ -53,7 +53,7 @@ namespace ListaSpesa.src.views
             #region Add All
             ApplicationBarIconButton appBarButtonAddAll =
                 new ApplicationBarIconButton(new
-                Uri("/Images/appbar.add.rest.png", UriKind.Relative));
+                Uri("/Images/AddToCart.png", UriKind.Relative));
             appBarButtonAddAll.Click += appBarButtonAddAll_Click;
             appBarButtonAddAll.Text = AppResources.AddAll;
             #endregion
@@ -66,14 +66,14 @@ namespace ListaSpesa.src.views
             appBarButtonAddSelected.Text = AppResources.AddSelected;
             #endregion
 
-            //#region Empty
-            //// Create a new button and set the text value to the localized string from AppResources.
-            //ApplicationBarIconButton appBarButtonEmpty =
-            //    new ApplicationBarIconButton(new
-            //    Uri("/Images/appbar.cancel.rest.png", UriKind.Relative));
-            //appBarButtonEmpty.Click += appBarButtonEmpty_Click;
-            //appBarButtonEmpty.Text = AppResources.Svuota;
-            //#endregion
+            #region Empty
+            // Create a new button and set the text value to the localized string from AppResources.
+            ApplicationBarIconButton appBarButtonEmpty =
+                new ApplicationBarIconButton(new
+                Uri("/Images/appbar.cancel.rest.png", UriKind.Relative));
+            appBarButtonEmpty.Click += appBarButtonEmpty_Click;
+            appBarButtonEmpty.Text = AppResources.Svuota;
+            #endregion
 
             //#region Favourites
             //ApplicationBarIconButton appBarButtonFavs =
@@ -89,7 +89,7 @@ namespace ListaSpesa.src.views
             //appBarButtonInfo.Text = AppResources.Info;
             //#endregion
 
-            //ApplicationBar.Buttons.Add(appBarButtonEmpty);
+            ApplicationBar.Buttons.Add(appBarButtonEmpty);
             ApplicationBar.Buttons.Add(appBarButtonAddAll);
             ApplicationBar.Buttons.Add(appBarButtonAddSelected);
         }
@@ -121,10 +121,10 @@ namespace ListaSpesa.src.views
         //    this.NavigationService.Navigate(new Uri("/src/views/InfoPage.xaml", UriKind.Relative));
         //}
 
-        //void appBarButtonEmpty_Click(object sender, EventArgs e)
-        //{
-        //    App.Current.ViewModel.ClearList();
-        //}
+        void appBarButtonEmpty_Click(object sender, EventArgs e)
+        {
+            App.Current.FavouritesViewModel.ClearList();
+        }
         #endregion
     }
 }

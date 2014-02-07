@@ -141,13 +141,7 @@ namespace ListaSpesa.Viewmodels
             }
         }
 
-        /// <summary>
-        /// Svuota la lista(se non esiste, la crea)
-        /// </summary>
-        public void ClearList()
-        {
-            _listOfItems.Clear();
-        }
+
 
 
         #endregion

@@ -9,5 +9,13 @@ namespace ListaSpesa.Viewmodels
     public abstract class ListItemViewModel : ViewModelBase
     {
         public abstract ObservableCollection<ListItem> ListOfItems { get; }
+
+        /// <summary>
+        /// Svuota la lista(se non esiste, la crea)
+        /// </summary>
+        public void ClearList()
+        {
+            ListOfItems.Clear();
+        }
     }
 }
