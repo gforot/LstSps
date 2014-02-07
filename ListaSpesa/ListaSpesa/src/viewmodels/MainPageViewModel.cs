@@ -41,11 +41,6 @@ namespace ListaSpesa.Viewmodels
             get { return _listOfItems; }
         }
 
-        public override bool IsAddToFavouritesVisible
-        {
-            get { return true; }
-        }
-
 
         #endregion
 

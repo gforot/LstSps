@@ -67,11 +67,6 @@ namespace ListaSpesa.Viewmodels
         }
 
 
-        public override bool IsAddToFavouritesVisible
-        {
-            get { return false; }
-        }
-
         public void UncheckAll()
         {
             foreach (ListItem item in _listOfItems)
