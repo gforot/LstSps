@@ -14,8 +14,6 @@ namespace ListaSpesa.Viewmodels
 {
     public class MainPageViewModel : ListItemViewModel
     {
-        public event EventHandler CloseItemReorderPopupRequired;
-
         #region Costruttore
         /// <summary>
         /// Costruttore

@@ -28,15 +28,11 @@ namespace ListaSpesa
             CreateTiles();
 
             this.DataContext = App.Current.ViewModel;
-            App.Current.ViewModel.CloseItemReorderPopupRequired += ViewModel_CloseItemReorderPopupRequired;
+
             FeedbackOverlay.VisibilityChanged += FeedbackOverlay_VisibilityChanged;
 
         }
 
-        void ViewModel_CloseItemReorderPopupRequired(object sender, EventArgs e)
-        {
-            CloseItemReorderPopup();
-        }
 
         private void CreateTiles()
         {
@@ -113,6 +109,7 @@ namespace ListaSpesa
             ApplicationBar.Buttons.Add(appBarButtonInfo);
         }
 
+
         void appBarButtonFavs_Click(object sender, EventArgs e)
         {
             this.NavigationService.Navigate(new Uri("/src/views/FavouritesPage.xaml", UriKind.Relative));
@@ -129,10 +126,6 @@ namespace ListaSpesa
         }
         #endregion
 
-        private void CloseItemReorderPopup()
-        {
-            lb.ActivateItemReorderForItem(null);
-        }
 
     }
 }
