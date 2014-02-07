@@ -11,10 +11,5 @@ namespace ListaSpesa.Viewmodels
         public abstract bool IsAddToFavouritesVisible { get; }
 
         public abstract ObservableCollection<ListItem> ListOfItems { get; }
-
-        public List<int> GetUsedIds()
-        {
-            return new List<int>(ListOfItems.Select(li => li.Id));
-        }
     }
 }

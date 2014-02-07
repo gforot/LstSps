@@ -91,13 +91,11 @@ namespace ListaSpesa
             {
                 ViewModel = new MainPageViewModel();
                 ViewModel.SetItems(Datalayer.DataLayer.GetInstance().LoadSpesa());
-                IdGenerator.GetInstance().AddUsedIds(ViewModel.GetUsedIds());
             }
             if (FavouritesViewModel == null)
             {
                 FavouritesViewModel = new FavouritesPageViewModel();
                 FavouritesViewModel.SetItems(Datalayer.DataLayer.GetInstance().LoadFavourites());
-                IdGenerator.GetInstance().AddUsedIds(FavouritesViewModel.GetUsedIds());
             }
         }
 

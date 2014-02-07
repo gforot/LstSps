@@ -26,28 +26,10 @@ namespace ListaSpesa.Model
         {
             Text = text;
             _isChecked = isChecked;
-            Id = IdGenerator.GetInstance().GetNextId();
         }
         #endregion
 
         #region Properties
-
-        #region Id
-        private string _idPrpName = "Id";
-        private int _id;
-
-        [DataMember]
-        public int Id
-        {
-            get { return _id; }
-            set
-            {
-                _id = value;
-                RaisePropertyChanged(_idPrpName);
-            }
-        }
-
-        #endregion
 
         #region IsChecked
 
