@@ -10,8 +10,6 @@ namespace ListaSpesa.Model
     [DataContract]
     public class ListItem : ViewModelBase
     {
-        public event RemoveItemEventHandler RemoveItemRequested;
-
         #region Constructors
         public ListItem()
             :this(string.Empty)
@@ -29,7 +27,6 @@ namespace ListaSpesa.Model
             Text = text;
             _isChecked = isChecked;
             Id = IdGenerator.GetInstance().GetNextId();
-            RemoveItemCommand = new RelayCommand<MenuItem>((o) => RemoveItem(o), (o) => CanRemoveItem);
         }
         #endregion
 
@@ -87,20 +84,5 @@ namespace ListaSpesa.Model
         #endregion
 
 
-        [XmlIgnore()] 
-        public RelayCommand<MenuItem> RemoveItemCommand { get; private set; }
-
-        private bool CanRemoveItem
-        {
-            get { return true; }
-        }
-
-        private void RemoveItem(MenuItem item)
-        {
-            if (RemoveItemRequested != null)
-            {
-                RemoveItemRequested(item);
-            }
-        }
     }
 }

@@ -12,7 +12,6 @@ using Microsoft.Phone.Controls;
 
 namespace ListaSpesa.Viewmodels
 {
-    public delegate void RemoveItemEventHandler(MenuItem item);
     public class MainPageViewModel : ListItemViewModel
     {
         public event EventHandler CloseItemReorderPopupRequired;
@@ -27,14 +26,11 @@ namespace ListaSpesa.Viewmodels
             _listOfItems.CollectionChanged += _listOfItems_CollectionChanged;
 
             AddItemCommand = new RelayCommand(AddItem, CanAddItem);
-            RemoveItemCommand = new RelayCommand(RemoveItem);
             NewItemText = string.Empty;
         }
         #endregion
 
         #region Properties
-
-        public ListItem PivotItem { get; set; }
 
         #region ListOfItems
         private const string _listOfItemsPrpName = "ListOfItems";
@@ -114,19 +110,6 @@ namespace ListaSpesa.Viewmodels
         #region Commands
         public RelayCommand AddItemCommand { get; private set; }
 
-        public RelayCommand TestCommand { get; private set; }
-        public RelayCommand RemoveItemCommand { get; private set; }
-        private void RemoveItem()
-        {
-            if (PivotItem != null)
-            {
-                RemoveItem(PivotItem);
-                if (CloseItemReorderPopupRequired != null)
-                {
-                    CloseItemReorderPopupRequired(this, new EventArgs());
-                }
-            }
-        }
 
         /// <summary>
         /// Dice se è abilitato il button di aggiunta elemento alla spesa
@@ -148,16 +131,11 @@ namespace ListaSpesa.Viewmodels
         public void AddItem(string text)
         {
             ListItem li = new ListItem(text);
-            li.RemoveItemRequested += li_RemoveItemRequested;
-            AddItemToList(li);
+             AddItemToList(li);
         }
 
 
 
-        void li_RemoveItemRequested(MenuItem item)
-        {
-            RemoveItem(item.DataContext as ListItem);
-        }
         #endregion
 
         #region Metodi public
@@ -178,10 +156,6 @@ namespace ListaSpesa.Viewmodels
             _listOfItems.Clear();
         }
 
-        public void RemoveItem(ListItem li)
-        {
-            _listOfItems.Remove(li);
-        }
 
         #endregion
 

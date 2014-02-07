@@ -21,19 +21,6 @@
         </LinearGradientBrush>
         <DataTemplate x:Key="listItemTemplate">
             <Border HorizontalAlignment="Stretch" Margin="2" BorderBrush="{Binding IsChecked, Converter={StaticResource checkedToColorConverter}}" BorderThickness="2" CornerRadius="5" >
-                <controls:ContextMenuService.ContextMenu>
-                    <controls:ContextMenu IsEnabled="True" >
-                        <!--<controls:MenuItem Header="{Binding Path=LocalizedResources.Delete, Source={StaticResource LocalizedStrings}}"
-                                           Command="{Binding RemoveItemCommand}" 
-                                           CommandParameter="{Binding RelativeSource={RelativeSource Self}}"/>-->
-                        <controls:MenuItem Header="{Binding Path=LocalizedResources.AddToFavourites, Source={StaticResource LocalizedStrings}}"
-                                           Command="{Binding AddToFavouritesCommand}" 
-                                           CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
-                                           Visibility="{Binding ElementName=lb, 
-                            Path=DataContext.IsAddToFavouritesVisible, Converter={StaticResource visibleToVisibilityConverter}}"
-                                           />
-                    </controls:ContextMenu>
-                </controls:ContextMenuService.ContextMenu>
                 <StackPanel Orientation="Horizontal" Width="600">
                     <CheckBox  IsChecked="{Binding IsChecked, Mode=TwoWay}"/>
                     <TextBlock Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Text="{Binding Text}"/>

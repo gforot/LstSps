@@ -129,18 +129,6 @@ namespace ListaSpesa
         }
         #endregion
 
-        private void lb_ItemReorderStateChanged(object sender, Telerik.Windows.Controls.ItemReorderStateChangedEventArgs e)
-        {
-            if (e.PivotItem.DataContext is ListItem)
-            {
-                App.Current.ViewModel.PivotItem = e.PivotItem.DataContext as ListItem;
-            }
-            else
-            {
-                App.Current.ViewModel.PivotItem = null;
-            }
-        }
-
         private void CloseItemReorderPopup()
         {
             lb.ActivateItemReorderForItem(null);

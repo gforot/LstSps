@@ -63,15 +63,9 @@ namespace ListaSpesa.Viewmodels
 
         private void AddItemToList(ListItem item)
         {
-            item.PropertyChanged += item_PropertyChanged;
             _listOfItems.Add(item);
         }
 
-        private void item_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            //RaiseSummaryChanged();
-            //RaiseIsSpesaFinished();
-        }
 
         public override bool IsAddToFavouritesVisible
         {
@@ -111,18 +105,8 @@ namespace ListaSpesa.Viewmodels
         public void AddItem(string text)
         {
             ListItem li = new ListItem(text);
-            li.RemoveItemRequested += li_RemoveItemRequested;
             AddItemToList(li);
         }
 
-        void li_RemoveItemRequested(MenuItem item)
-        {
-            RemoveItem(item.DataContext as ListItem);
-        }
-
-        public void RemoveItem(ListItem li)
-        {
-            _listOfItems.Remove(li);
-        }
     }
 }
