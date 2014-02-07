@@ -17,5 +17,13 @@ namespace ListaSpesa.Viewmodels
         {
             ListOfItems.Clear();
         }
+
+        public void CheckAll()
+        {
+            foreach (ListItem li in ListOfItems)
+            {
+                li.IsChecked = true;
+            }
+        }
     }
 }

@@ -75,6 +75,15 @@ namespace ListaSpesa.src.views
             appBarButtonEmpty.Text = AppResources.Svuota;
             #endregion
 
+            #region Select All
+            // Create a new button and set the text value to the localized string from AppResources.
+            ApplicationBarIconButton appBarSelectAll =
+                new ApplicationBarIconButton(new
+                Uri("/Images/SelectAll.png", UriKind.Relative));
+            appBarSelectAll.Click += appBarSelectAll_Click;
+            appBarSelectAll.Text = AppResources.SelectAll;
+            #endregion
+
             //#region Favourites
             //ApplicationBarIconButton appBarButtonFavs =
             //     new ApplicationBarIconButton(new Uri("/Images/appbar.favs.rest.png", UriKind.Relative));
@@ -90,8 +99,13 @@ namespace ListaSpesa.src.views
             //#endregion
 
             ApplicationBar.Buttons.Add(appBarButtonEmpty);
-            ApplicationBar.Buttons.Add(appBarButtonAddAll);
+            ApplicationBar.Buttons.Add(appBarSelectAll);
             ApplicationBar.Buttons.Add(appBarButtonAddSelected);
+        }
+
+        void appBarSelectAll_Click(object sender, EventArgs e)
+        {
+            App.Current.FavouritesViewModel.CheckAll();
         }
 
         void appBarButtonAddSelected_Click(object sender, EventArgs e)

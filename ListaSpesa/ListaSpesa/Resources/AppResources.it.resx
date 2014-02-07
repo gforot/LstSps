@@ -121,7 +121,7 @@
     <value>Aggiungi tutti</value>
   </data>
   <data name="AddSelected" xml:space="preserve">
-    <value>Aggiungi selezionati</value>
+    <value>Aggiungi sel.</value>
   </data>
   <data name="AddToFavourites" xml:space="preserve">
     <value>Aggiungi ai favoriti</value>
@@ -158,6 +158,9 @@
   </data>
   <data name="Salva" xml:space="preserve">
     <value>Salva</value>
+  </data>
+  <data name="SelectAll" xml:space="preserve">
+    <value>Seleziona</value>
   </data>
   <data name="SpesaCompletata" xml:space="preserve">
     <value>Spesa Completata</value>

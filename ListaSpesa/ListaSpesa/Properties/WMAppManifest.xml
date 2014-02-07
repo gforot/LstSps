@@ -3,7 +3,7 @@
   <AppExtra xmlns="" AppPlatformVersion="8.0">
     <Extra Name="Tiles" />
   </AppExtra>
-  <App xmlns="" ProductID="{077527f7-6e29-47fe-8144-8ea8332aaf8a}" Title="Lista Spesa" RuntimeType="Silverlight" Version="1.0.1" Genre="apps.normal" Author="Andrea Rota" Description="Applicazione per gestire una lista della spesa" Publisher="Andrea Rota" BitsPerPixel="16">
+  <App xmlns="" ProductID="{077527f7-6e29-47fe-8144-8ea8332aaf8a}" Title="Lista Spesa" RuntimeType="Silverlight" Version="1.4.0" Genre="apps.normal" Author="Ar" Description="Applicazione per gestire una lista della spesa" Publisher="Ar" BitsPerPixel="16">
     <IconPath IsRelative="true" IsResource="false">99x99.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_GAMERSERVICES" />
