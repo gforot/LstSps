@@ -109,6 +109,7 @@ namespace ListaSpesa
         // This code will not execute when the application is closing
         private void Application_Deactivated(object sender, DeactivatedEventArgs e)
         {
+            Save();
         }
 
         // Code to execute when the application is closing (eg, user hit Back)
@@ -116,6 +117,11 @@ namespace ListaSpesa
         private void Application_Closing(object sender, ClosingEventArgs e)
         {
             //Inserire qui il salvataggio?
+            Save();
+        }
+
+        private void Save()
+        {
             Datalayer.DataLayer.GetInstance().SaveSpesa(ViewModel.ListOfItems);
             Datalayer.DataLayer.GetInstance().SaveFavourites(FavouritesViewModel.ListOfItems);
         }
