@@ -115,6 +115,8 @@ namespace ListaSpesa.src.views
                 if (!item.IsChecked) continue;
                 App.Current.ViewModel.AddItem(item.Text);
             }
+
+            NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
         }
 
         void appBarButtonAddAll_Click(object sender, EventArgs e)
