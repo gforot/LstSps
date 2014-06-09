@@ -56,9 +56,11 @@
         </Grid>
         <ctrl:FeedbackOverlay x:Name="FeedbackOverlay"
                               Grid.RowSpan="4"
-                              FeedbackTo="rotandrea@gmail.com"
+                              FeedbackTo="gforot@hotmail.it"
                               ApplicationName="{Binding Path=LocalizedResources.ApplicationTitle, Source={StaticResource LocalizedStrings}}"
-                              CompanyName="gforot"/>
+                              CompanyName="gforot"
+                              
+                              />
     </Grid>
 
 
